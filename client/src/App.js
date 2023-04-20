@@ -7,6 +7,13 @@ import ForgotPassword from './Component/Customer/ForgotPassword';
 import CreateNewPassWord from './Component/Customer/CreateNewPassword';
 import Confirmation from './Component/Customer/Confirmation';
 import CustomerMenu from './Component/Customer/menu';
+import Cart from './Component/Customer/Cart';
+import Momo from './Component/Customer/momo';
+import Banking from './Component/Customer/banking';
+import Ship_address from './Component/Customer/ship_address';
+import Chooseshipping from './Component/Customer/Chooseshipping';
+import Choosepayment from './Component/Customer/Choosepayment';
+
 
 // import CusDetail from './Component/Admin/cusdetail';
 import CusList from './Component/Admin/cuslist';
@@ -30,7 +37,15 @@ function App()
             <Route path="forgot_password" element={ <ForgotPassword /> } />
             <Route path="create_new_password" element={ <CreateNewPassWord /> } />
             <Route path="confirm" element={ <Confirmation /> } />
-            <Route path="test" element={ <CustomerMenu /> }> {/*this is only temporary */ }
+            <Route  element={ <CustomerMenu /> }> {/*this is only temporary */ }
+            <Route path="cart" element={ <Cart /> } />{/*newly added */ }
+              <Route path="momo" element={ <Momo /> } />{/*newly added */ }
+              <Route path="banking" element={ <Banking /> } />{/*newly added */ }
+              <Route path="ship_address" element={ <Ship_address /> } />{/*newly added */ }
+              <Route path="chooseshipping" element={ <Chooseshipping /> } />{/*newly added */ }
+              <Route path="choosepayment" element={ <Choosepayment /> } />{/*newly added */ }
+           
+           
 
             </Route>
           </Route>
@@ -41,6 +56,7 @@ function App()
             <Route element={ <AdminMenu /> }>
               <Route path="home" element={ <AdminHome /> } />
               <Route path="customerlist" element={ <CusList /> } />
+             
             </Route>
           </Route>
 

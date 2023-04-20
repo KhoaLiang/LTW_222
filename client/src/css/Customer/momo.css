@@ -1,0 +1,64 @@
+.sidebar {
+  height: 100vh;
+  padding: 1rem;
+}
+
+
+.sidebar a {
+  color: white;
+}
+
+
+.position-absolute.top-0.end-0 {
+  position: fixed;
+}
+.pos-info{
+  position:relative;
+  top: 50px;
+  right: 100px;
+}
+.pos-img{
+  position:relative;
+  top: 50px;
+  
+}
+.pad{
+  padding-top: 20px;
+}
+
+
+/*make the 3 buttons appear in the same line*/
+.count-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+.nav-container {
+  position: relative;
+}
+
+.logout-btn {
+  position: absolute;
+  bottom: 0;
+  left: 150px;
+}
+.thank-you-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #7a7979;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+
+
