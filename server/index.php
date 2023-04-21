@@ -20,6 +20,7 @@
       $router->post("/admin/customer/detail/history", "AdminController@customerHistory");
       $router->post("/admin/customer/detail/edit", "AdminController@editCustomer");
       $router->get("/admin/game/list", "AdminController@getGameList");
+      $router->get("/admin/game/detail", "AdminController@getGameDetail");
       $router->post("/admin/game/delete", "AdminController@deleteGame");
       $router->post("/admin/game/find", "AdminController@findGame");
 

@@ -9,7 +9,7 @@ class GameModel
             $user = 'owner';
             $password = 'owner123';
             $database = 'game_store';
-            $port = '3306';
+            $port = '3307';
 
             $this->db = new mysqli($host, $user, $password, $database, $port);
             if ($this->db->connect_error) {
@@ -25,6 +25,20 @@ class GameModel
             $arr = [];
             if ($result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+      public function getAllInfo()
+      {
+            $sql = "SELECT name,id,price,discount,ratings,description,spec_minimum,spec_recommended,picture_1,count(activation_code.game_id) as solds from game join activation_code on game_id=id where status='used' group by name,id,price,discount,ratings order by name";
+            $result = $this->db->query($sql);
+
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $row['picture_1'] = unpack('c*', $row['picture_1']);
                         $arr[] = $row;
                   }
             }

@@ -39,6 +39,7 @@ export default function CusDetail()
             axios.post('http://localhost/admin/customer/detail', formData)
                 .then(res =>
                 {
+                    console.log(res.data)
                     setCustomer({
                         name: res.data.name,
                         email: res.data.email,

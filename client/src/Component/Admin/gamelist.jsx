@@ -42,6 +42,7 @@ export default function GameList()
                         .then(res =>
                         {
                               let temp = [];
+                              console.log(res.data)
                               for (let i = 0; i < res.data.length; i++)
                                     temp.push(<Game key={ i } i={ i } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } solds={ res.data[i].solds } ratings={ res.data[i].ratings } discount={ res.data[i].discount } />);
                               const target = ReactDOM.createRoot(document.getElementById('game_list_table_body'));

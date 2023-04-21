@@ -61,6 +61,11 @@ class AdminController
             $arr = $this->game_model->getList();
             echo json_encode($arr);
       }
+      public function getGameDetail()
+      {
+            $arr = $this->game_model->getAllInfo();
+            echo json_encode($arr);
+      }
 
       public function deleteGame()
       {
