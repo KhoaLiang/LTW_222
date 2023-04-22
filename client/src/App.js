@@ -10,9 +10,10 @@ import CustomerMenu from './Component/Customer/menu';
 import Cart from './Component/Customer/Cart';
 import Momo from './Component/Customer/momo';
 import Banking from './Component/Customer/banking';
-import Ship_address from './Component/Customer/ship_address';
-import Chooseshipping from './Component/Customer/Chooseshipping';
+
+
 import Choosepayment from './Component/Customer/Choosepayment';
+import Bill from './Component/Customer/bill';
 
 
 // import CusDetail from './Component/Admin/cusdetail';
@@ -41,9 +42,10 @@ function App()
             <Route path="cart" element={ <Cart /> } />{/*newly added */ }
               <Route path="momo" element={ <Momo /> } />{/*newly added */ }
               <Route path="banking" element={ <Banking /> } />{/*newly added */ }
-              <Route path="ship_address" element={ <Ship_address /> } />{/*newly added */ }
-              <Route path="chooseshipping" element={ <Chooseshipping /> } />{/*newly added */ }
+             
+              
               <Route path="choosepayment" element={ <Choosepayment /> } />{/*newly added */ }
+              <Route path="bill" element={ <Bill /> } />{/*newly added */ }
            
            
 

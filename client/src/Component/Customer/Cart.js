@@ -103,7 +103,7 @@ function Cart() {
             </Col>
             
           </Row>
-          <Link to="../chooseshipping">  <button className="long-button">Purchase</button></Link>
+          <Link to="../choosepayment">  <button className="long-button">Purchase</button></Link>
         </Col>
       </Row>
       

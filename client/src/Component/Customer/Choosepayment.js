@@ -10,7 +10,7 @@ function Choosepayment() {
     <Container fluid>
       <Row>
         <Col sm={12} md={12} lg={12} xl={12} className="content">
-        <Link to="../chooseshipping">   <Button variant="primary" className="position-absolute top-0 end-0">Back</Button></Link>
+        <Link to="../cart">   <Button variant="primary" className="position-absolute top-0 end-0">Back</Button></Link>
         <div style={{ fontSize: "36px", textAlign: "center", margin: "40px 0" }}>
          Choose Payment Method
         </div>

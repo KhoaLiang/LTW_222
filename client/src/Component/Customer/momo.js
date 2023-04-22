@@ -5,11 +5,8 @@ import { Container, Row, Col, Nav, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function Momo() {
-  const [showThankYou, setShowThankYou] = useState(false);
-
-  // Define a function to handle the button click
-  function handleButtonClick() {
-    setShowThankYou(true);
+  function handleClick() {
+    alert('Thank you for using our service');
   }
   return (
     <Container fluid>
@@ -26,10 +23,10 @@ function Momo() {
           <Row>
           <Col sm={6} md={6} lg={6} xl={6} >
                 <div className="d-flex flex-column align-items-center pos-img">
-                    <img src="https://play-lh.googleusercontent.com/dQbjuW6Jrwzavx7UCwvGzA_sleZe3-Km1KISpMLGVf1Be5N6hN6-tdKxE5RDQvOiGRg" alt="example" style={{height: "200px"}} />
+                    <img src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.15752-9/341273789_251371673954419_5008259796472040346_n.png?stp=dst-png_p1080x2048&_nc_cat=101&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Htyh5NsCVJEAX864ga1&_nc_ht=scontent.fsgn4-1.fna&oh=03_AdQIwRJYwZINbpPmd2No7OjQz9kXO1SYAySqPKICDnu60A&oe=646ABE5E" alt="example" style={{height: "200px"}} />
                     
-        <Button variant="primary"  onClick={handleButtonClick}>confirm</Button>
-            {showThankYou && <div className="thank-you-box">Thank you for using our service!</div>}
+                    <Link to="../bill">  <Button variant="primary" onClick={handleClick}>confirm</Button></Link>
+            
     
                 </div>
             </Col>
