@@ -32,7 +32,7 @@ class CustomerController
       }
       public function findGame(){
             $data = $_POST['data'];
-            $arr = $this->game_model->find($data);
+            $arr = $this->game_model->findGame($data);
             echo json_encode($arr);
       }
 }

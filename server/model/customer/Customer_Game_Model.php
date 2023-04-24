@@ -72,7 +72,7 @@ class CustomerGameModel
             return $arr;
       }
 
-      public function find($data)
+      public function findGame($data)
       {
             $sql = "SELECT name,id,price,discount,ratings, picture_1 from game where name like '%$data%'";
             $result = $this->db->query($sql);
