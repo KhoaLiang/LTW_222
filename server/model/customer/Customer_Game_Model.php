@@ -30,6 +30,61 @@ class CustomerGameModel
             }
             return $arr;
       }
+      
+      public function getGameList()
+      {
+            $sql = "select name, id, discount, ratings, picture_1 from game";
+            $result = $this->db->query($sql);
+
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function getWishlist($id) {
+            $sql = "select name, price, discount, picture_1 from game join wishlist on game_id = id where customer_id = '%$id%'";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $row['picture_1'] = unpack('c*', $row['picture_1']);
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function getCart($id){
+        $sql = "select name, price, discount, picture_1, amount from game join shopping_cart on game_id = id where customer_id = '%$id%'";
+            $result = $this->db->query($sql);
+
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $row['picture_1'] = unpack('c*', $row['picture_1']);
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function find($data)
+      {
+            $sql = "SELECT name,id,price,discount,ratings, picture_1 from game where name like '%$data%'";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $row['picture_1'] = unpack('c*', $row['picture_1']);
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
 
       public function __destruct()
       {
