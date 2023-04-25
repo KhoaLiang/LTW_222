@@ -5,7 +5,7 @@ import $ from 'jquery';
 import { TbFlame } from 'react-icons/tb';
 import { CiDiscount1 } from 'react-icons/ci';
 import ReactDOM from 'react-dom/client';
-
+import {domain} from '../tools/domain';
 
 const BestSeller = (props) =>
 {
@@ -40,7 +40,7 @@ export default function AdminHome()
                   document.getElementById("home").style.backgroundColor = "blue";
                   document.getElementById("home").style.color = "#00B3EC";
 
-                  axios.get('http://localhost/admin/getBestSeller')
+                  axios.get(`http://${domain}/admin/getBestSeller`)
                         .then(res =>
                         {
                               const group1 = ReactDOM.createRoot(document.getElementsByClassName('group')[0]);

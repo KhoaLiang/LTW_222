@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import {domain} from '../tools/domain';
 
 const AdminLogin = () =>
 {
@@ -24,7 +25,7 @@ const AdminLogin = () =>
     const formData = new FormData();
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
-    axios.post('http://localhost/admin/login', formData)
+    axios.post(`http://${domain}/admin/login`, formData)
       .then(res =>
       {
         console.log(res);

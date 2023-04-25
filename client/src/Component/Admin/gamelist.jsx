@@ -6,6 +6,7 @@ import styles from '../../css/Admin/gamelist.module.css';
 import { useNavigate } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { AiFillStar } from 'react-icons/ai';
+import {domain} from '../tools/domain';
 
 
 const Game = (props) =>
@@ -38,7 +39,7 @@ export default function GameList()
                   $("#game").css("color", "white");
                   $("#game").css("background-color", "#00B3EC");
 
-                  axios.get('http://localhost/admin/game/list')
+                  axios.get(`http://${domain}/admin/game/list`)
                         .then(res =>
                         {
                               let temp = [];
@@ -65,7 +66,7 @@ export default function GameList()
                   console.log(checkedValues[i]);
                   const formData = new FormData();
                   formData.append("id", checkedValues[i]);
-                  axios.post('http://localhost/admin/game/delete', formData)
+                  axios.post(`http://${domain}/admin/game/delete`, formData)
                         .then(res =>
                         {
                               console.log(res);
@@ -108,7 +109,7 @@ export default function GameList()
                   $("#game_list_table_body").empty();
                   const formData = new FormData();
                   formData.append("data", $("#search").val());
-                  axios.post('http://localhost/admin/game/find', formData)
+                  axios.post(`http://${domain}/admin/game/find`, formData)
                         .then(res =>
                         {
                               let temp = [];

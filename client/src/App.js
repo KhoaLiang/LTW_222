@@ -9,7 +9,8 @@ import Confirmation from './Component/Customer/Confirmation';
 import CustomerMenu from './Component/Customer/menu';
 import CusDetail from './Component/Admin/cusdetail';
 import CusList from './Component/Admin/cuslist';
-import AllGames from './Component/Customer/all_games'
+import AllGames from './Component/Customer/all_games';
+import Wishlist from './Component/Customer/wishlist';
 // import Stat from './Component/Admin/Stat';
 
 import AdminMenu from './Component/Admin/menu';
@@ -37,6 +38,7 @@ function App()
             <Route element={ <CustomerMenu /> }>
               <Route path="home" element={ <CustomerHome /> } />
               <Route path="allgames" element={ <AllGames /> } />
+              <Route path="wishlist" element={ <Wishlist /> } />
             </Route>
           </Route>
 

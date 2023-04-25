@@ -7,6 +7,7 @@ import { BsCart } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import $ from 'jquery';
 import { CiDiscount1 } from 'react-icons/ci';
+import {domain} from '../tools/domain';
 
 const BestSeller = (props) =>
 {
@@ -68,7 +69,7 @@ export default function CustomerHome()
                   document.getElementById("home").style.backgroundColor = "#00B3EC";
                   document.getElementById("home").style.color = "white";
 
-                  axios.get('http://localhost/getBestSeller')
+                  axios.get(`http://${domain}/getBestSeller`)
                         .then(res =>
                         {
                               const group1 = ReactDOM.createRoot(document.getElementsByClassName('group')[0]);

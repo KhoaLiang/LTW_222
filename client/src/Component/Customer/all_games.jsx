@@ -7,6 +7,7 @@ import { BsCart, BsSearch } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import $ from 'jquery';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+import { domain } from '../tools/domain';
 
 const BestSeller = (props) => {
   const addToWishlist = (event, id) => {
@@ -42,12 +43,15 @@ const BestSeller = (props) => {
   );
 }
 
-export default function CustomerHome() {
+export default function CustomerGame() {
   const effectRan = useRef(false);
 
   const [offset, setOffset] = useState(0);
   const [count, setCount] = useState(6);
   const [flag, setFlag] = useState(false);
+
+  const [prev, setPrev] = useState('');
+  const [next, setNext] = useState('');
   useEffect(() => {
     if (effectRan.current === false) {
       document.getElementById("home").style.backgroundColor = "#00B3EC";
@@ -69,45 +73,49 @@ export default function CustomerHome() {
           $(".dropdown").first().css("display", "block");
         }
       });
+      console.log(count);
       const formData = new FormData();
       formData.append("limit", count);
       formData.append("offset", offset);
-      axios.post("http://localhost/getAllGames", formData)
+      axios.post(`http://${domain}/getAllGames`, formData)
         .then((res) => {
-          if (res.data.length ===0){
+          if (res.data.length === 0) {
             setFlag(true);
           }
-          console.log(res);
-          let temp = [];
-          for (let i = 0; i < res.data.length; i++) {
-            const data = new Uint8Array(Object.values(res.data[i].picture_1));
-            const blob = new Blob([data], { type: "image/jpg" });
-            const url = URL.createObjectURL(blob);
-            temp.push(
-              <BestSeller
-                key={i}
-                url={url}
-                class={"mx-5"}
-                price={res.data[i].price}
-                id={res.data[i].id}
-              />
-            );
-            const line = count/2;
-            if (i%line ===line-1){
-              var index = (i-line+1)/line;
-              const group = ReactDOM.createRoot(
-                document.getElementsByClassName("group")[index]
+          else {
+            setFlag(false);
+            console.log(res);
+            let temp = [];
+            for (let i = 0; i < res.data.length; i++) {
+              const data = new Uint8Array(Object.values(res.data[i].picture_1));
+              const blob = new Blob([data], { type: "image/jpg" });
+              const url = URL.createObjectURL(blob);
+              temp.push(
+                <BestSeller
+                  key={i}
+                  url={url}
+                  class={"mx-5"}
+                  price={res.data[i].price}
+                  id={res.data[i].id}
+                />
               );
-              try {group.render(<>{temp.slice(i-line+1, i+1)}</>);}
-              catch{group.render(<>{temp.slice(i-line+1)}</>);}
-            }
-            else if (i+1 ===res.data.length){
-              const bot  = i - (i%line);
-              index = bot / line;
-              const group = ReactDOM.createRoot(
-                document.getElementsByClassName("group")[index]
-              );
-              group.render(<>{temp.slice(bot)}</>);
+              const line = count / 2;
+              if (i % line === line - 1) {
+                var index = (i - line + 1) / line;
+                const group = ReactDOM.createRoot(
+                  document.getElementsByClassName("group")[index]
+                );
+                try { group.render(<>{temp.slice(i - line + 1, i + 1)}</>); }
+                catch { group.render(<>{temp.slice(i - line + 1)}</>); }
+              }
+              else if (i + 1 === res.data.length) {
+                const bot = i - (i % line);
+                index = bot / line;
+                const group = ReactDOM.createRoot(
+                  document.getElementsByClassName("group")[index]
+                );
+                group.render(<>{temp.slice(bot)}</>);
+              }
             }
           }
         })
@@ -123,7 +131,7 @@ export default function CustomerHome() {
     formData.append("data", $("#search").val());
     formData.append("limit", count);
     formData.append("offset", offset);
-    axios.post("http://localhost/findGame", formData)
+    axios.post(`http://${domain}/findGame`, formData)
       .then((res) => {
         console.log(res);
         let temp = [];
@@ -140,17 +148,17 @@ export default function CustomerHome() {
               id={res.data[i].id}
             />
           );
-          const line = count/2;
-          if (i%line ===line-1){
-            var index = (i-line+1)/line;
+          const line = count / 2;
+          if (i % line === line - 1) {
+            var index = (i - line + 1) / line;
             const group = ReactDOM.createRoot(
               document.getElementsByClassName("group")[index]
             );
-            try {group.render(<>{temp.slice(i-line+1, i+1)}</>);}
-            catch{group.render(<>{temp.slice(i-line+1)}</>);}
+            try { group.render(<>{temp.slice(i - line + 1, i + 1)}</>); }
+            catch { group.render(<>{temp.slice(i - line + 1)}</>); }
           }
-          else if (i+1 ===res.data.length){
-            const bot  = i - (i%line);
+          else if (i + 1 === res.data.length) {
+            const bot = i - (i % line);
             index = bot / line;
             const group = ReactDOM.createRoot(
               document.getElementsByClassName("group")[index]
@@ -179,10 +187,9 @@ export default function CustomerHome() {
           <div className="group justify-content-center align-items-center">
           </div>
           <div>
-            <GrFormPrevious size={30}  onClick={ () => {  if (offset !== 0) { $(".group").empty(); setOffset(offset - count); effectRan.current = false;} } } />
-            <GrFormNext size={30}  onClick={ () => { if (!flag) {  $(".group").empty(); setOffset(offset + count); effectRan.current = false;}} } />
+            <GrFormPrevious size={30} style={{display: `${prev}`}} onClick={() => { if (offset !== 0) { $(".group").empty(); setOffset(offset - count); effectRan.current = false; setPrev(''); setNext('')} else setPrev('none') }} />
+            <GrFormNext size={30} style={{display: `${next}`}} onClick={() => { if (!flag) { $(".group").empty(); setOffset(offset + count); effectRan.current = false; setNext(''); setPrev('');} else setNext('none') }} />
           </div>
-          {/* <button onClick={handleShowMore}>Show more</button> */}
 
         </div>
       </div>

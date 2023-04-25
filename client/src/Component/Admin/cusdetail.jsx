@@ -5,6 +5,7 @@ import axios from 'axios';
 import $ from 'jquery';
 import { BiTrash } from 'react-icons/bi';
 import ReactDOM from 'react-dom/client';
+import {domain} from '../tools/domain';
 
 const History = (props) =>
 {
@@ -36,7 +37,7 @@ export default function CusDetail()
 
             const formData = new FormData();
             formData.append("data", id);
-            axios.post('http://localhost/admin/customer/detail', formData)
+            axios.post(`http://${domain}/admin/customer/detail`, formData)
                 .then(res =>
                 {
                     setCustomer({
@@ -58,7 +59,7 @@ export default function CusDetail()
     {
         const formData = new FormData();
         formData.append("data", id);
-        axios.post('http://localhost/admin/customer/detail/history', formData)
+        axios.post(`http://${domain}/admin/customer/detail/history`, formData)
             .then(res =>
             {
                 let temp = [];
@@ -114,7 +115,7 @@ export default function CusDetail()
             formData.append("id", id);
             formData.append("rank", $(`.select_menu`).val());
             formData.append("discount", $(`.discount_input`).val());
-            axios.post('http://localhost/admin/customer/detail/edit', formData)
+            axios.post(`http://${domain}/admin/customer/detail/edit`, formData)
                 .then(res =>
                 {
                     console.log(res);
@@ -133,7 +134,7 @@ export default function CusDetail()
     {
         const formData = new FormData();
         formData.append("id", id);
-        axios.post('http://localhost/admin/customer/delete', formData)
+        axios.post(`http://${domain}/admin/customer/delete`, formData)
             .then(res =>
             {
                 console.log(res);

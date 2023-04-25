@@ -19,51 +19,24 @@ class CustomerController
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
       }
-      public function getAllGames()
-      {
-            $limit = $_POST["limit"];
-            $offset = $_POST["offset"];
-            $arr = $this->game_model->getAllGames($limit, $offset);
+
+      public function getGameList(){
+            $arr = $this->game_model->getGameList();
             echo json_encode($arr);
       }
-      public function findGame()
-      {
+      public function getWishlist(){
+            $id = $_POST['id'];
+            $arr = $this->game_model->getWishlist($id);
+            echo json_encode($arr);
+      }
+      public function getCart(){
+            $id = $_POST['id'];
+            $arr = $this->game_model->getCart($id);
+            echo json_encode($arr);
+      }
+      public function findGame(){
             $data = $_POST['data'];
-            $limit = $_POST['limit'];
-            $offset = $_POST["offset"];
-            $arr = $this->game_model->findGame($data, $limit, $offset);
+            $arr = $this->game_model->findGame($data);
             echo json_encode($arr);
-      }
-      public function login()
-      {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $arr = $this->customer_model->login($username, $password);
-            echo json_encode($arr ? true : false);
-      }
-
-      public function recovery()
-      {
-            $username = $_POST['username'];
-            $arr = $this->customer_model->recovery($username);
-            echo json_encode($arr ? true : false);
-      }
-
-      public function newPassword()
-      {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $this->customer_model->newPassword($username, $password);
-            echo json_encode(array("message" => "success"));
-      }
-
-      public function signUp()
-      {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $phone = $_POST['phone'];
-            echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone));
       }
 }
