@@ -57,6 +57,7 @@ export default function AdminHome()
                                     else
                                           temp2.push(<BestSeller key={ i } url={ url } class={ "mx-5" } price={ res.data[i].price } id={ res.data[i].id } discount={ res.data[i].discount } total_sale={ res.data[i].total_sale } />);
                               }
+                              console.log(res.data)
                               group1.render(<>{ temp1 }</>);
                               group2.render(<>{ temp2 }</>);
                         })

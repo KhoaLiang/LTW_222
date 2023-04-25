@@ -40,7 +40,7 @@ export default function GameDetail()
 
                   const formData = new FormData();
                   formData.append("id", id);
-                  axios.post('http://localhost/admin/game/detail', formData)
+                  axios.post('http://10.147.18.85/admin/game/detail', formData)
                         .then(res =>
                         {
                               const data1 = new Uint8Array(Object.values(res.data.picture_1));
@@ -71,7 +71,7 @@ export default function GameDetail()
                                     image4url: url4
                               });
                         }).catch(error => { console.log(error); })
-                  axios.post('http://localhost/admin/game/category', formData)
+                  axios.post('http://10.147.18.85/admin/game/category', formData)
                         .then(res =>
                         {
 
@@ -85,7 +85,7 @@ export default function GameDetail()
                                     $("<p>").text(res.data[res.data.length - 1].category_type)
                               );
                         }).catch(error => { console.log(error); })
-                  axios.post('http://localhost/admin/game/detail/status', formData)
+                  axios.post('http://10.147.18.85/admin/game/detail/status', formData)
                         .then(res =>
                         {
                               if (res.data.length === 1)
@@ -109,7 +109,7 @@ export default function GameDetail()
       {
             const formData = new FormData();
             formData.append("id", id);
-            axios.post('http://localhost/admin/game/delete', formData)
+            axios.post('http://10.147.18.85/admin/game/delete', formData)
                   .then(res =>
                   {
                         console.log(res);

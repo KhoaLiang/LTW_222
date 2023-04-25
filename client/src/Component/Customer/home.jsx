@@ -66,7 +66,7 @@ export default function CustomerHome()
                   document.getElementById("home").style.backgroundColor = "#00B3EC";
                   document.getElementById("home").style.color = "white";
 
-                  axios.get('http://localhost/getBestSeller')
+                  axios.get('http://10.147.18.85/getBestSeller')
                         .then(res =>
                         {
                               const group1 = ReactDOM.createRoot(document.getElementsByClassName('group')[0]);
@@ -82,6 +82,7 @@ export default function CustomerHome()
                                     else
                                           temp2.push(<BestSeller key={ i } url={ url } class={ "mx-5" } price={ res.data[i].price } id={ res.data[i].id } discount={ res.data[i].discount } />);
                               }
+                              console.log(res.data)
                               group1.render(<>{ temp1 }</>);
                               group2.render(<>{ temp2 }</>);
                         })

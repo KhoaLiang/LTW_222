@@ -93,14 +93,11 @@ export default function CustomerHome() {
 
             if (i < 3) {
               temp1.push(
-                <BestSeller
-                  key={i}
-                  url={url}
-                  class={""}
-                  price={res.data[i].price}
-                  id={res.data[i].id}
-                />
-              );
+                <BestSeller key={i} url={url} class={""} price={res.data[i].price} id={res.data[i].id} />);
+                  
+                  
+                
+              
             } else if (i >= 3 && i <= 5) {
               temp2.push(
                 <BestSeller
