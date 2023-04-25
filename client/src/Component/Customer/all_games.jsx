@@ -6,7 +6,7 @@ import { TbFlame } from 'react-icons/tb';
 import { BsCart, BsSearch } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import $ from 'jquery';
-import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
 const BestSeller = (props) => {
   const addToWishlist = (event, id) => {
@@ -44,23 +44,20 @@ const BestSeller = (props) => {
 
 export default function CustomerHome() {
   const effectRan = useRef(false);
-  const [showMore, setShowMore] = useState(false);
-  const effectRan2 = useRef(false);
-  const handleShowMore = () => {
-    effectRan2.current = true;
-    setShowMore(!showMore);
-  };
-  const [offset, setOffset] = useState(3);
+
+  const [offset, setOffset] = useState(0);
+  const [count, setCount] = useState(6);
+  const [flag, setFlag] = useState(false);
   useEffect(() => {
     if (effectRan.current === false) {
       document.getElementById("home").style.backgroundColor = "#00B3EC";
       document.getElementById("home").style.color = "white";
       window.addEventListener('resize', () => {
         if (window.innerWidth < 728) {
-          setOffset(1);
+          setCount(2);
         }
         else if (window.innerWidth < 1080) {
-          setOffset(2);
+          setCount(4);
         }
 
         if (window.innerWidth > 575) {
@@ -72,167 +69,95 @@ export default function CustomerHome() {
           $(".dropdown").first().css("display", "block");
         }
       });
-      axios
-        .get("http://26.13.223.69/getAllGames")
+      const formData = new FormData();
+      formData.append("limit", count);
+      formData.append("offset", offset);
+      axios.post("http://localhost/getAllGames", formData)
         .then((res) => {
-          const group1 = ReactDOM.createRoot(
-            document.getElementsByClassName("group")[0]
-          );
-          const group2 = ReactDOM.createRoot(
-            document.getElementsByClassName("group")[1]
-          );
-
-
-          let temp1 = [],
-            temp2 = [],
-            temp3 = [];
+          if (res.data.length ===0){
+            setFlag(true);
+          }
+          console.log(res);
+          let temp = [];
           for (let i = 0; i < res.data.length; i++) {
             const data = new Uint8Array(Object.values(res.data[i].picture_1));
             const blob = new Blob([data], { type: "image/jpg" });
             const url = URL.createObjectURL(blob);
-
-            if (i < 3) {
-              temp1.push(
-                <BestSeller
-                  key={i}
-                  url={url}
-                  class={""}
-                  price={res.data[i].price}
-                  id={res.data[i].id}
-                />
+            temp.push(
+              <BestSeller
+                key={i}
+                url={url}
+                class={"mx-5"}
+                price={res.data[i].price}
+                id={res.data[i].id}
+              />
+            );
+            const line = count/2;
+            if (i%line ===line-1){
+              var index = (i-line+1)/line;
+              const group = ReactDOM.createRoot(
+                document.getElementsByClassName("group")[index]
               );
-            } else if (i >= 3 && i <= 5) {
-              temp2.push(
-                <BestSeller
-                  key={i}
-                  url={url}
-                  class={"mx-5"}
-                  price={res.data[i].price}
-                  id={res.data[i].id}
-                />
+              try {group.render(<>{temp.slice(i-line+1, i+1)}</>);}
+              catch{group.render(<>{temp.slice(i-line+1)}</>);}
+            }
+            else if (i+1 ===res.data.length){
+              const bot  = i - (i%line);
+              index = bot / line;
+              const group = ReactDOM.createRoot(
+                document.getElementsByClassName("group")[index]
               );
-            } else if (i >= 6 && i <= 8) {
-              temp3.push(
-                <BestSeller
-                  key={i}
-                  url={url}
-                  class={"mx-5"}
-                  price={res.data[i].price}
-                  id={res.data[i].id}
-                />
-              );
+              group.render(<>{temp.slice(bot)}</>);
             }
           }
-          group1.render(<>{temp1}</>);
-          group2.render(<>{temp2}</>);
-
         })
         .catch((error) => console.log(error));
 
       console.log("rendered");
       effectRan.current = true;
     }
-  }, []);
-  useEffect(() => {
-    if (effectRan2.current === false) {
-      axios
-        .get("http://26.13.223.69/getAllGames")
-        .then((res) => {
-          console.log(res);
-          const group3 = ReactDOM.createRoot(
-            document.getElementsByClassName("group")[2]
-          );
-          const group4 = ReactDOM.createRoot(
-            document.getElementsByClassName("group")[3]
-          );
-          let
-            temp3 = [],
-            temp4 = [];
-          for (let i = 0; i < res.data.length; i++) {
-            const data = new Uint8Array(Object.values(res.data[i].picture_1));
-            const blob = new Blob([data], { type: "image/jpg" });
-            const url = URL.createObjectURL(blob);
-            if (i >= 6 && i <= 8) {
-              temp3.push(
-                <BestSeller
-                  key={i}
-                  url={url}
-                  class={"mx-5"}
-                  price={res.data[i].price}
-                  id={res.data[i].id}
-                />
-              );
-            }
-
-            if (i >= 9 && i <= 11) {
-              temp4.push(
-                <BestSeller
-                  key={i}
-                  url={url}
-                  class={"mx-5"}
-                  price={res.data[i].price}
-                  id={res.data[i].id}
-                />
-              );
-            }
-
-          }
-          group3.render(<>{temp3}</>);
-          group4.render(<>{temp4}</>);
-        })
-        .catch((error) => console.log(error));
-
-      console.log("rendered2");
-      effectRan2.current = true;
-    }
-  }, [handleShowMore]);
+  }, [offset, count]);
   const search = () => {
     $(".group").empty();
     const formData = new FormData();
     formData.append("data", $("#search").val());
-    axios.post('http://26.13.223.69/findGame', formData)
+    formData.append("limit", count);
+    formData.append("offset", offset);
+    axios.post("http://localhost/findGame", formData)
       .then((res) => {
         console.log(res);
-        const group3 = ReactDOM.createRoot(
-          document.getElementsByClassName("group")[2]
-        );
-        const group4 = ReactDOM.createRoot(
-          document.getElementsByClassName("group")[3]
-        );
-        let
-          temp3 = [],
-          temp4 = [];
+        let temp = [];
         for (let i = 0; i < res.data.length; i++) {
           const data = new Uint8Array(Object.values(res.data[i].picture_1));
           const blob = new Blob([data], { type: "image/jpg" });
           const url = URL.createObjectURL(blob);
-          if (i >= 6 && i <= 8) {
-            temp3.push(
-              <BestSeller
-                key={i}
-                url={url}
-                class={"mx-5"}
-                price={res.data[i].price}
-                id={res.data[i].id}
-              />
+          temp.push(
+            <BestSeller
+              key={i}
+              url={url}
+              class={"mx-5"}
+              price={res.data[i].price}
+              id={res.data[i].id}
+            />
+          );
+          const line = count/2;
+          if (i%line ===line-1){
+            var index = (i-line+1)/line;
+            const group = ReactDOM.createRoot(
+              document.getElementsByClassName("group")[index]
             );
+            try {group.render(<>{temp.slice(i-line+1, i+1)}</>);}
+            catch{group.render(<>{temp.slice(i-line+1)}</>);}
           }
-
-          if (i >= 9 && i <= 11) {
-            temp4.push(
-              <BestSeller
-                key={i}
-                url={url}
-                class={"mx-5"}
-                price={res.data[i].price}
-                id={res.data[i].id}
-              />
+          else if (i+1 ===res.data.length){
+            const bot  = i - (i%line);
+            index = bot / line;
+            const group = ReactDOM.createRoot(
+              document.getElementsByClassName("group")[index]
             );
+            group.render(<>{temp.slice(bot)}</>);
           }
-
         }
-        group3.render(<>{temp3}</>);
-        group4.render(<>{temp4}</>);
       })
       .catch((error) => console.log(error));
   };
@@ -249,17 +174,13 @@ export default function CustomerHome() {
           </form>
         </div>
         <div className="best-sellers cointainer overflow-auto" id='body' style={{ height: 'calc(100%-300px)' }}>
-          <div className="group">
+          <div className="group justify-content-center align-items-center">
           </div>
-          <div className="group">
-          </div>
-          <div className="group ">
-          </div>
-          <div className="group ">
+          <div className="group justify-content-center align-items-center">
           </div>
           <div>
-            {/* <GrFormPrevious onClick={ () => { if (offset !== 0) { setOffset(offset - 3); effectRan.current = false; $("#body").empty(); } } } />
-            <GrFormNext onClick={ () => { if (!flag) { setOffset(offset + 3); effectRan.current = false; $("#body").empty(); } } } /> */}
+            <GrFormPrevious size={30}  onClick={ () => {  if (offset !== 0) { $(".group").empty(); setOffset(offset - count); effectRan.current = false;} } } />
+            <GrFormNext size={30}  onClick={ () => { if (!flag) {  $(".group").empty(); setOffset(offset + count); effectRan.current = false;}} } />
           </div>
           {/* <button onClick={handleShowMore}>Show more</button> */}
 

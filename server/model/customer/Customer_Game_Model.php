@@ -9,7 +9,7 @@ class CustomerGameModel
             $user = 'owner';
             $password = 'owner123';
             $database = 'game_store';
-            $port = '3307';
+            $port = '3306';
 
             $this->db = new mysqli($host, $user, $password, $database, $port);
             if ($this->db->connect_error) {
@@ -30,9 +30,9 @@ class CustomerGameModel
             }
             return $arr;
       }
-      public function getAllGames()
+      public function getAllGames($limit, $offset)
       {
-            $sql = "SELECT id,name,picture_1, price, discount from game join activation_code on game.id=activation_code.game_id group by name order by name desc,name limit 13";
+            $sql = "SELECT id,name,picture_1, price, discount from game group by name order by name asc,name limit $limit offset $offset";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {
@@ -43,9 +43,9 @@ class CustomerGameModel
             }
             return $arr;
       }
-      public function findGame($data)
+      public function findGame($data,$limit, $offset)
       {
-            $sql = "SELECT name,id,price,discount,ratings, picture_1 from game where name like '%$data%' order by name";
+            $sql = "SELECT name,id,price,discount,ratings, picture_1 from game where name like '%$data%' order by name asc limit $limit offset $offset";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {

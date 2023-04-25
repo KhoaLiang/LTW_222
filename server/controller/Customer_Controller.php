@@ -21,13 +21,17 @@ class CustomerController
       }
       public function getAllGames()
       {
-            $arr = $this->game_model->getAllGames();
+            $limit = $_POST["limit"];
+            $offset = $_POST["offset"];
+            $arr = $this->game_model->getAllGames($limit, $offset);
             echo json_encode($arr);
       }
       public function findGame()
       {
             $data = $_POST['data'];
-            $arr = $this->game_model->findGame($data);
+            $limit = $_POST['limit'];
+            $offset = $_POST["offset"];
+            $arr = $this->game_model->findGame($data, $limit, $offset);
             echo json_encode($arr);
       }
       public function login()

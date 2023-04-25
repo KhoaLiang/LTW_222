@@ -11,7 +11,7 @@
       // define routes
       // customer routes
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
-      $router->get("/getAllGames", "CustomerController@getAllGames");
+      $router->post("/getAllGames", "CustomerController@getAllGames");
       $router->post("/findGame","CustomerController@findGame");
       $router->post("/login", "CustomerController@login");
       $router->post("/recovery", "CustomerController@recovery");

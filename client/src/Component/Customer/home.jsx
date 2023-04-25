@@ -42,7 +42,9 @@ const BestSeller = (props) =>
             <div className={ `sale d-flex flex-column align-items-center ${ props.class }` }>
                   <img className='pic' src={ props.url } alt=""></img>
                   <div className='section'>
-                        <button className='detail d-flex align-items-center justify-content-center' onClick={ () => { window.location.href = `/gamelist/${ props.id }`; } }>{ <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '25px', color: "red" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }</button>
+                        <button className='detail d-flex align-items-center justify-content-center' onClick={ () => { window.location.href = `/gamelist/${ props.id }`; } }>
+                              { <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '25px', color: "red" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }
+                        </button>
                         <div className='d-flex w-100 justify-content-center align-items-center' style={ {
                               marginTop: "3%",
                               marginBottom: "10px"
