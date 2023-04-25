@@ -118,7 +118,19 @@ class GameModel
             }
             return null;
       }
+      public function getGameCategory($id)
+      {
+            $sql = "SELECT category_type from belongs_to where game_id='$id'";
+            $result = $this->db->query($sql);
 
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
       public function updateGetGameCategory($id)
       {
             $sql = "SELECT category_type from belongs_to where game_id='$id'";
@@ -147,7 +159,6 @@ class GameModel
             }
             return null;
       }
-
       public function getBestSeller()
       {
             $sql = "SELECT id,name,picture_1, price,count(*) as total_sale from game join activation_code on game.id=activation_code.game_id where status=\"used\"  group by name order by total_sale desc,name limit 5";
@@ -161,7 +172,17 @@ class GameModel
             }
             return $arr;
       }
-
+      public function getGameStatus($id)
+      {
+            $sql = "select * from activation_code where game_id='$id' and status='available' limit 1";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  $row = $result->fetch_assoc();
+                  $arr[] = $row;
+            }
+            return $arr;
+      }
       public function __destruct()
       {
             $this->db->close();

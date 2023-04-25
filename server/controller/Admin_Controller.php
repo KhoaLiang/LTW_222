@@ -167,6 +167,12 @@ class AdminController
             $result = $this->game_model->updateGetGameDetail($_POST['id']);
             echo json_encode($result);
       }
+      public function getGameCategory()
+      {
+            $result = $this->game_model->getGameCategory($_POST['id']);
+            echo json_encode($result);
+      }
+
 
       public function updateGetGameCategory()
       {
