@@ -9,7 +9,7 @@ class CustomerSelfModel
             $user = 'owner';
             $password = 'owner123';
             $database = 'game_store';
-            $port = '3306';
+            $port = '3307';
 
             $this->db = new mysqli($host, $user, $password, $database, $port);
             if ($this->db->connect_error) {

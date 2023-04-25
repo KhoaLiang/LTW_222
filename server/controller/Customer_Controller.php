@@ -1,11 +1,12 @@
 <?php
 require_once(__DIR__ . '\\..\\model\\customer\\Customer_Game_Model.php');
 require_once(__DIR__ . '\\..\\model\\customer\\Customer_Model.php');
-
 class CustomerController
 {
       private $game_model;
       private $customer_model;
+
+
 
       public function __construct()
       {
@@ -18,7 +19,17 @@ class CustomerController
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
       }
-
+      public function getAllGames()
+      {
+            $arr = $this->game_model->getAllGames();
+            echo json_encode($arr);
+      }
+      public function findGame()
+      {
+            $data = $_POST['data'];
+            $arr = $this->game_model->findGame($data);
+            echo json_encode($arr);
+      }
       public function login()
       {
             $username = $_POST['username'];

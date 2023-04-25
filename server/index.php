@@ -11,11 +11,12 @@
       // define routes
       // customer routes
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
+      $router->get("/getAllGames", "CustomerController@getAllGames");
+      $router->post("/findGame","CustomerController@findGame");
       $router->post("/login", "CustomerController@login");
       $router->post("/recovery", "CustomerController@recovery");
       $router->post("/new_password", "CustomerController@newPassword");
       $router->post("/sign_up", "CustomerController@signUp");
-
       // admin routes
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
       $router->get("/admin/game/list", "AdminController@getGameList");
@@ -32,14 +33,12 @@
       $router->post("/admin/game/addCode", "AdminController@addCode");
       $router->post("/admin/game/addTag", "AdminController@addTag");
       $router->post("/admin/game/update/info", "AdminController@updateGetGameDetail");
-      $router->post("/admin/game/category", "AdminController@getGameCategory");
+      $router->post("/admin/game/update/category", "AdminController@updateGetGameCategory");
       $router->post("/admin/game/update", "AdminController@updateGame");
       $router->post("/admin/game/detail", "AdminController@getGameDetail");
-      $router->post("/admin/game/detail/status", "AdminController@getGameStatus");
       $router->post("/admin/login", "AdminController@login");
       $router->post("/admin/recovery", "AdminController@recovery");
       $router->post("/admin/new_password", "AdminController@newPassword");
-
       // run router
       $router->run();
       ?>
