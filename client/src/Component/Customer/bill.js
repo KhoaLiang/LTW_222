@@ -1,12 +1,28 @@
 import '../../css/Customer/bill.css';
 import BoxWithCopyButton from "../box";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 function Bill() {
 
-   
+  const savedCount1 = sessionStorage.getItem('count1');
+  const initialCount1 = savedCount1 !== null ? parseInt(savedCount1) : 0;
+  const [count1, setCount1] = useState(initialCount1);
+
+  const savedCount2 = sessionStorage.getItem('count2');
+  const initialCount2 = savedCount2 !== null ? parseInt(savedCount2) : 0;
+  const [count2, setCount2] = useState(initialCount2);
+
+  const [costgame1, setCostgame] = useState(count1 * 5);
+  useEffect(() => {
+    setCostgame(count1 * 5);
+  }, [count1]);
+  const [costgame2, setCostgame2] = useState(count2 * 10);
+  useEffect(() => {
+    setCostgame2(count2 * 10);
+  }, [count2]);
+ 
   
   return (
     <Container fluid>
@@ -25,12 +41,12 @@ function Bill() {
                     <p>Order number: #6065906</p>
                     <p>Creation Date: 2023-02-25 10:07:48</p>
                     <p>Order Status:Processed</p>
-                    
+                   
                     </div>
                     
                     <div className="col-md-6">
                     
-                    <p>Total product value: 20$</p>
+                    <p>Total product value: {costgame1+costgame2}$</p>
                     <p>Recipient: betsonavietnam@gmail.com</p>
                     </div>
                 </div>
@@ -46,7 +62,7 @@ function Bill() {
             <Col sm={6} md={6} lg={6} xl={6} >
                 <div className="d-flex flex-column pos-info">
                 <div> Name: Resident Evil 4</div>
-                    <div> Amount: 1</div>
+                    <div> Amount: {count2}</div>
                     <div>Status: <span style={{ color: 'green' }}>Purchased</span></div>
                     <div> Cost : $10</div>
                     <BoxWithCopyButton text="Some Download Link" />
@@ -62,9 +78,9 @@ function Bill() {
             <Col sm={6} md={6} lg={6} xl={6} >
                 <div className="d-flex flex-column pos-info">
                     <div> Name: Doki Doki Literature Club</div>
-                    <div> Amount: 1</div>
+                    <div> Amount: {count1}</div>
                     <div>Status: <span style={{ color: 'green' }}>Purchased</span></div>
-                    <div> Cost : $10</div>
+                    <div> Cost : $5</div>
                     <BoxWithCopyButton text="Some Download Link" />
                 </div>
             </Col>

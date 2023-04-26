@@ -9,21 +9,22 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 function Cart() {
 
     const [count1, setCount1] = useState(0);
     const [count2, setCount2] = useState(0);
-  
+    
     const handleIncrement1 = () => {
       setCount1(count1 + 1);
     };
   
     const handleDecrement1 = () => {
-      if (count1 > 0) {
+      if (count1 > 1) {
         setCount1(count1 - 1);
       }
     };
@@ -33,10 +34,12 @@ function Cart() {
     };
   
     const handleDecrement2 = () => {
-      if (count2 > 0) {
+      if (count2 > 1) {
         setCount2(count2 - 1);
       }
     };
+    sessionStorage.setItem('count1', count1);
+    sessionStorage.setItem('count2', count2);
    
   
   return (
@@ -63,6 +66,7 @@ function Cart() {
                     <div> Genre: Open World, Shooting, Horror</div>
                     <div> Status: Available</div>
                     <div> Cost : $10</div>
+                  
                     <div className="d-flex align-items-center justify-content-left">
                          <Button variant="outline-secondary" onClick={handleDecrement2}>
                                 -
@@ -88,7 +92,7 @@ function Cart() {
                     <div> Name: Doki Doki Literature Club</div>
                     <div> Genre: Visual Novel, Dating, Horror</div>
                     <div> Status: Available</div>
-                    <div> Cost : $10</div>
+                    <div> Cost : $5</div>
                     <div className="d-flex align-items-center justify-content-left">
                          <Button variant="outline-secondary" onClick={handleDecrement1}>
                                 -
