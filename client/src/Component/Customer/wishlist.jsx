@@ -39,7 +39,7 @@ const BestSeller = (props) => {
   }
   return (
     <div className={`sale d-flex flex-column align-items-center ${props.class}`}>
-      <img className='pic' src={props.url} alt="picture"></img>
+      <img className='pic' src={props.url} alt="pic"></img>
       <div className='section'>
         <button className='detail mt-3' onClick={() => { window.location.href = `/admin/gamelist/${props.id}`; }}>${props.price}</button>
         <div className='d-flex w-100 justify-content-center align-items-center mt-2'>
