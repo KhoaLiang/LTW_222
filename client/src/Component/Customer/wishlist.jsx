@@ -10,12 +10,18 @@ import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import {domain} from '../tools/domain';
 
 const BestSeller = (props) => {
-  const addToWishlist = (event, id) => {
+  const removefromWishlist = (event, id) => {
     event.preventDefault();
     if ($(`.add_to_wishlist_${id}`).css("color") === "rgb(0, 0, 0)")
       $(`.add_to_wishlist_${id}`).css("color", "red");
     else
       $(`.add_to_wishlist_${id}`).css("color", "rgb(0, 0, 0)");
+    const form = new FormData();
+    form.append("game_id", id);
+    axios.post(`http://${domain}/removeWishlis`, form)
+      .then(res=>{
+        console.log(res.message);
+      });
   }
 
   const addToCart = (event, id) => {
@@ -24,6 +30,12 @@ const BestSeller = (props) => {
       $(`.add_to_cart_${id}`).css("color", "#00B3EC");
     else
       $(`.add_to_cart_${id}`).css("color", "rgb(0, 0, 0)");
+    const form = new FormData();
+    form.append("game_id", id);
+    axios.post(`http://${domain}/addCart`, form)
+      .then(res=>{
+        console.log(res.message);
+      });
   }
   return (
     <div className={`sale d-flex flex-column align-items-center ${props.class}`}>
@@ -36,7 +48,7 @@ const BestSeller = (props) => {
           }} onClick={(e) => { addToCart(e, props.id) }} />
           <IoHeartDislikeOutline className={`mx-3 add_to_wishlist add_to_wishlist_${props.id}`} style={{
             fontSize: "35px"
-          }} onClick={(e) => { addToWishlist(e, props.id) }} />
+          }} onClick={(e) => { removefromWishlist(e, props.id) }} />
         </div>
       </div>
     </div>
