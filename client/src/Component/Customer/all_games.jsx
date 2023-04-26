@@ -16,6 +16,12 @@ const BestSeller = (props) => {
       $(`.add_to_wishlist_${id}`).css("color", "red");
     else
       $(`.add_to_wishlist_${id}`).css("color", "rgb(0, 0, 0)");
+    const form = new FormData();
+    form.append("game_id", id);
+    axios.post(`http://${domain}/addWishlist`, form)
+      .then(res=>{
+        console.log(res.message);
+      });
   }
 
   const addToCart = (event, id) => {
@@ -24,6 +30,12 @@ const BestSeller = (props) => {
       $(`.add_to_cart_${id}`).css("color", "#00B3EC");
     else
       $(`.add_to_cart_${id}`).css("color", "rgb(0, 0, 0)");
+    const form = new FormData();
+    form.append("game_id", id);
+    axios.post(`http://${domain}/addCart`, form)
+      .then(res=>{
+        console.log(res.message);
+      });
   }
   return (
     <div className={`sale d-flex flex-column align-items-center ${props.class}`}>
