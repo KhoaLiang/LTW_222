@@ -6,7 +6,6 @@ import $ from 'jquery';
 import axios from 'axios';
 import { checkCookie } from '../tools/cookie';
 import { domain } from '../tools/domain';
-
 export const AddGame = () =>
 {
       const render = useRef(false);

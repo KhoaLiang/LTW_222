@@ -6,20 +6,23 @@ import Login from './Component/Customer/Login';
 import Signup from './Component/Customer/Signup';
 import ForgotPassword from './Component/Customer/ForgotPassword';
 import CreateNewPassWord from './Component/Customer/CreateNewPassword';
+import Confirmation from './Component/Customer/Confirmation';
 import CustomerMenu from './Component/Customer/menu';
 import CusPersonalInfo from './Component/Customer/personalInfo';
 import CustomerHome from './Component/Customer/home';
-
 import CusDetail from './Component/Admin/cusdetail';
 import CusList from './Component/Admin/cuslist';
+import AllGames from './Component/Customer/all_games';
+import Wishlist from './Component/Customer/wishlist';
+// import Stat from './Component/Admin/Stat';
 import AdminMenu from './Component/Admin/menu';
 import AdminHome from './Component/Admin/home';
+import AdminLogin from './Component/Admin/Login';
+import AdminForgotPassword from './Component/Admin/ForgotPassword';
+import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
 import GameList from './Component/Admin/gamelist';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
 import GameDetail from './Component/Admin/gamedetail';
-import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
-import AdminForgotPassword from './Component/Admin/ForgotPassword';
-import AdminLogin from './Component/Admin/Login';
 import AdminInfo from './Component/Admin/personalInfo';
 
 function App()
@@ -33,9 +36,12 @@ function App()
             <Route path="sign_up" element={ <Signup /> } />
             <Route path="forgot_password" element={ <ForgotPassword /> } />
             <Route path="create_new_password" element={ <CreateNewPassWord /> } />
+            <Route path="confirm" element={ <Confirmation /> } />
             <Route element={ <CustomerMenu /> }>
               <Route path="myself" element={ <CusPersonalInfo /> } />
               <Route path="home" element={ <CustomerHome /> } />
+              <Route path="allgames" element={ <AllGames /> } />
+              <Route path="wishlist" element={ <Wishlist /> } />
             </Route>
           </Route>
 

@@ -2,7 +2,6 @@
 require_once(__DIR__ . '\\..\\model\\customer\\Customer_Game_Model.php');
 require_once(__DIR__ . '\\..\\model\\customer\\Customer_Model.php');
 require_once(__DIR__ . '\\..\\model\\customer\\Customer_Session.php');
-
 class CustomerController
 {
       private $game_model;
@@ -40,30 +39,30 @@ class CustomerController
                   }
             }
       }
-
-      public function recovery()
+      
+      public function getGameList()
       {
-            $username = $_POST['username'];
-            $arr = $this->customer_model->recovery($username);
-            echo json_encode($arr ? true : false);
+            $arr = $this->game_model->getGameList();
+            echo json_encode($arr);
       }
 
-      public function newPassword()
+      public function getWishlist()
       {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $this->customer_model->newPassword($username, $password);
-            echo json_encode(array("message" => "success"));
+            $id = $_POST['id'];
+            $arr = $this->game_model->getWishlist($id);
+            echo json_encode($arr);
       }
-
-      public function signUp()
+      public function getCart()
       {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $phone = $_POST['phone'];
-            echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone));
+            $id = $_POST['id'];
+            $arr = $this->game_model->getCart($id);
+            echo json_encode($arr);
+      }
+      public function findGame()
+      {
+            $data = $_POST['data'];
+            $arr = $this->game_model->findGame($data);
+            echo json_encode($arr);
       }
 
       public function myself()

@@ -14,7 +14,6 @@ class AdminController
       {
             $this->customer_model = new CustomerModel();
             $this->game_model = new GameModel();
-            $this->admin_model = new AdminModel();
       }
 
       public function getCustomerList()
@@ -173,9 +172,9 @@ class AdminController
             echo json_encode($result);
       }
 
-      public function getGameCategory()
+      public function updateGetGameCategory()
       {
-            $result = $this->game_model->getGameCategory($_POST['id']);
+            $result = $this->game_model->updateGetGameCategory($_POST['id']);
             echo json_encode($result);
       }
 
@@ -256,7 +255,6 @@ class AdminController
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
       }
-
       public function getGameStatus()
       {
             $id = $_POST['id'];

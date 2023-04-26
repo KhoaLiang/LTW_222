@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { domain } from '../tools/domain';
 
-
 function Signup()
 {
   const Navigate = useNavigate();
